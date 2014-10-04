@@ -37,7 +37,7 @@ public class Graph {
      * @return        the Pagerank vector
      */
     public Vector computePagerank(double beta, double epsilon) {
-        Vector r = Vector.fromValue(mSize, 1.0 / (double)mSize);
+        Vector r = new Vector(mSize, 1.0 / (double)mSize);
         Vector r_ = new Vector(mSize);
 
         do {

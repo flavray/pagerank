@@ -4,43 +4,32 @@
  * Mathematical vector implementation, using `double` for coordinates
  * No size verification when performing operations, assuming vectors are coherent
  */
-public class Vector {
-    private int mSize;
-    private double[] mContent;
 
+import java.util.ArrayList;
+
+public class Vector extends ArrayList<Double> {
     /**
      * Creates a new vector
-     * @param size the dimension of the vector
+     * @param size the size/dimension of the to-be-created vector
      */
     public Vector(int size) {
-        mSize = size;
-        mContent = new double[mSize];
+        super(size);
+
+        // Initial value for the vector
+        for (int i = 0; i < size; ++i)
+            add(0.0);
     }
 
     /**
-     * Returns the value of the i-th coordinate of the vector
-     * @param i the index of the coordinate
-     * @return  the i-th coordinate
+     * Creates a new vector with a given value
+     * @param size  the size of the to-be-created vector
+     * @param value the value to be assigned to every coordinate
      */
-    public double get(int i) {
-        return mContent[i];
-    }
+    public Vector(int size, double value) {
+        super(size);
 
-    /**
-     * Sets the i-th coordinate of the vector
-     * @param i     the index of the coordinate
-     * @param value the new i-th coordinate
-     */
-    public void set(int i, double value) {
-        mContent[i] = value;
-    }
-
-    /**
-     * Returns the size of the vector
-     * @return the size of the vector
-     */
-    public int size() {
-        return mSize;
+        for (int i = 0; i < size; ++i)
+            add(value);
     }
 
     /**
@@ -50,8 +39,8 @@ public class Vector {
     public double sum() {
         double s = 0.0;
 
-        for (int i = 0; i < mSize; ++i)
-            s += mContent[i];
+        for (int i = 0; i < size(); ++i)
+            s += get(i);
 
         return s;
     }
@@ -61,8 +50,8 @@ public class Vector {
      * @param a the vector to be copied
      */
     public void copyFrom(Vector a) {
-        for (int i = 0; i < mSize; ++i)
-            mContent[i] = a.get(i);
+        for (int i = 0; i < size(); ++i)
+            set(i, a.get(i));
     }
 
     /**
@@ -81,30 +70,15 @@ public class Vector {
         return v;
     }
 
-    /**
-     * Returns a vector of a given size, assigning the same value to every coordinate
-     * @param size  the size of the to-be-created vector
-     * @param value the value to be assigned to every coordinate
-     * @return      the vector [value] * size
-     */
-    public static Vector fromValue(int size, double value) {
-        Vector v = new Vector(size);
-
-        for (int i = 0; i < size; ++i)
-            v.set(i, value);
-
-        return v;
-    }
-
     @Override
     public String toString() {
         String result = "[";
 
-        if (mSize > 0)
-            result += mContent[0] + "";
+        if (size() > 0)
+            result += get(0) + "";
 
-        for (int i = 1; i < mSize; ++i)
-            result += " " + mContent[i];
+        for (int i = 1; i < size(); ++i)
+            result += " " + get(i);
 
         result += "]";
 
