@@ -1,12 +1,11 @@
 
 
+import java.util.ArrayList;
+
 /**
  * Mathematical vector implementation, using `double` for coordinates
  * No size verification when performing operations, assuming vectors are coherent
  */
-
-import java.util.ArrayList;
-
 public class Vector extends ArrayList<Double> {
     /**
      * Creates a new vector
