@@ -23,8 +23,12 @@ public class Parser {
 
             Document doc = Jsoup.parse(mContent);
 
-            for (Element link : doc.select("a[href]"))
-                mHyperlinks.add(link.attr("href"));
+            for (Element link : doc.select("a[href]")) {
+                String url = link.attr("href");
+
+                if (url.length() > 0)
+                    mHyperlinks.add(url);
+            }
         }
 
         return mHyperlinks;
