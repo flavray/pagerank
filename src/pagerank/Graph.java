@@ -1,4 +1,6 @@
+package pagerank;
 
+import pagerank.Vector;
 
 import java.util.ArrayList;
 

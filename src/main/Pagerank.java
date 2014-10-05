@@ -1,4 +1,8 @@
+package main;
 
+import html.Folder;
+import html.Parser;
+import pagerank.Graph;
 
 public class Pagerank {
     public static void main(String[] args) {
