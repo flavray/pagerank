@@ -3,7 +3,6 @@ package html;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class Folder {
