@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Graph {
     private int mSize;
     private ArrayList<Integer>[] mAdjacency;
+    private int[] mOutDegrees;
 
     /**
      * Creates a new graph
@@ -21,6 +22,8 @@ public class Graph {
 
         for (int i = 0; i < mSize; ++i)
             mAdjacency[i] = new ArrayList<Integer>();
+
+        mOutDegrees = new int[mSize];
     }
 
     /**
@@ -30,6 +33,7 @@ public class Graph {
      */
     public void addEdge(int source, int destination) {
         mAdjacency[destination].add(source);
+        mOutDegrees[source]++;
     }
 
     /**
@@ -52,7 +56,7 @@ public class Graph {
                     double sum = 0.0;
 
                     for (Integer j : mAdjacency[i])
-                        sum += r_.get(j) / (double)mAdjacency[j].size();
+                        sum += r_.get(j) / (double) mOutDegrees[j];
 
                     sum *= beta;
 
