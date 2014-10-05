@@ -4,6 +4,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -13,10 +16,23 @@ public class Parser {
     private String mContent;
     private ArrayList<String> mHyperlinks;
 
-    public Parser(String content) {
-        mContent = content;
+    /**
+     * Creates a new HTML parser
+     * @param filepath the HTML file to parse
+     */
+    public Parser(String filepath) {
+        try {
+            mContent = readFile(filepath);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Returns all the hyperlinks present in the HTML
+     * @return the hyperlinks
+     */
     public ArrayList<String> getHyperlinks() {
         if (mHyperlinks == null) {
             mHyperlinks = new ArrayList<String>();
@@ -32,5 +48,23 @@ public class Parser {
         }
 
         return mHyperlinks;
+    }
+
+    private String readFile(String fileName) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line + "\n");
+                line = br.readLine();
+            }
+
+            return sb.toString();
+        } finally {
+            br.close();
+        }
     }
 }

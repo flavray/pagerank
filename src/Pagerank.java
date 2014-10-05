@@ -12,5 +12,10 @@ public class Pagerank {
         graph.addEdge(2, 1);
 
         System.out.println(graph.computePagerank(0.8, 0.0001));
+
+        Folder f = new Folder("html/");
+
+        for (String file : f.getHTMLFiles())
+            System.out.println(file + ": " + (new Parser("html/" + file).getHyperlinks()));
     }
 }
